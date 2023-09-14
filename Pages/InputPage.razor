@@ -1,0 +1,14 @@
+﻿@page "/"
+
+<EditForm Model="@newItem">
+    <CustomInputText @bind-Value="newItem.ItemName" maxlength="30" minChars="4" />
+</EditForm>
+
+@code {
+    NewItem newItem = new NewItem();
+
+    private class NewItem
+    {
+        public string ItemName { get; set; } = "";
+    }
+}

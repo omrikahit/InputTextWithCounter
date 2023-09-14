@@ -1,0 +1,51 @@
+﻿@inherits InputText
+
+<input @attributes="AdditionalAttributes" class="@CssClass @inputClass default-input"
+@bind="CurrentValueAsString" @bind:event="oninput" @onkeyup="countChars" />
+
+<span>@CurrentValueAsString.Length</span>
+<p>@alert</p>
+
+@code {
+    string inputClass = "";
+    string alert = "";
+
+    void countChars()
+    {
+
+        int length = CurrentValueAsString.Length;
+        string minChars = AdditionalAttributes["minChars"].ToString();
+        int minCharsInt = Convert.ToInt32(minChars);
+
+        if(length > minCharsInt && length <= 10)
+        {
+            inputClass = "good-input";
+            alert = $"יש בין {minCharsInt} ל10 תווים";
+        }
+        else if (length > 10 && length <= 15)
+        {
+            inputClass = "warnning-input";
+            alert = "יש בין 10 ל15 תווים";
+        }
+        else if (length > 10 && length <= 15)
+        {
+            inputClass = "warnning-input";
+            alert = "יש בין 10 ל15 תווים";
+        }
+        else if (length > 15 && length < 30)
+        {
+            inputClass = "danger-input";
+            alert = "יש יותר מ15 תווים";
+        }
+        else if (length >= 30)
+        {
+            inputClass = "danger-input";
+            alert = "הגעת למקסימום התווים";
+        }
+        else
+        {
+            inputClass = "";
+            alert = "אין מספיק תווים";
+        }
+    }
+}
